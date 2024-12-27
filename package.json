@@ -1,6 +1,6 @@
 {
   "name": "generate-expressjs",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "A cli app to create an expressjs boiler plate.",
   "main": "index.js",
   "type": "module",
@@ -30,6 +30,7 @@
     "create-express-app"
   ],
   "dependencies": {
-    "chalk": "^5.4.1"
+    "chalk": "^5.4.1",
+    "ora": "^8.1.1"
   }
 }

@@ -4,6 +4,7 @@ import * as readline from "node:readline/promises"
 import { stdin as input, stdout as output } from "node:process"
 import { createProjectStructure } from "../lib/createProjectStructure.js"
 import chalk from "chalk"
+import ora from "ora"
 
 const defaultAppName = "my-app"
 const npmInit = "npm init -y"
@@ -41,6 +42,7 @@ const main = async () => {
     const addBuildScript = 'npm pkg set scripts.build="tsc"'
 
     console.log(chalk.dim("\n📦 Generating the project...\n"))
+    const spinner = ora("📦 Generating the project...").start()
 
     const path = await createProjectStructure(appName, isTypeScriptSupport)
     await execScript(npmInit, path)
@@ -58,6 +60,8 @@ const main = async () => {
       await execScript(addBuildScript, path)
       await execScript(addTypeScript, path)
     }
+
+    spinner.succeed("Project generated successfully!")
 
     console.log(
       chalk.green.bold(`\n✨ ${appName} has been created successfully!\n`)
