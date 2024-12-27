@@ -9,6 +9,7 @@ const defaultAppName = "my-app"
 const npmInit = "npm init -y"
 const installExpress = "npm i express"
 const installNodemon = "npm install -D nodemon"
+const installDotenv = "npm install dotenv"
 const convertToEs6 = 'npm pkg set type="module"'
 const addTypeScript = "npm install typescript @types/node @types/express"
 
@@ -43,6 +44,7 @@ const main = async () => {
     await execScript(npmInit, path)
     await execScript(installExpress, path)
     await execScript(installNodemon, path)
+    await execScript(installDotenv, path)
     await execScript(addStartScript, path)
     await execScript(addDevScript, path)
     await execScript(convertToEs6, path)
