@@ -9,7 +9,7 @@ Generate ExpressJS is a CLI app that creates an ExpressJS boilerplate project. T
 - Installs ExpressJS and Nodemon.
 - Sets up a basic ExpressJS server in `src/app.js` or `src/app.ts` if TypeScript support is enabled.
 - Configures start and development scripts in `package.json`.
-- Adds a `.gitignore` file with common Node.js and project-specific ignores.
+- Adds a `.gitignore` file with common Node.js, ES6 module, and project-specific ignores.
 - Optionally adds TypeScript support with a `tsconfig.json` file.
 
 ## Installation

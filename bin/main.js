@@ -37,7 +37,7 @@ const main = async () => {
       ? 'npm pkg set scripts.dev="tsc && nodemon ./dist/app.js"'
       : 'npm pkg set scripts.dev="nodemon ./src/app.js"'
 
-    console.log(chalk.dim("\n📦 Installing dependencies...\n"))
+    console.log(chalk.dim("\n📦 Generating the project...\n"))
 
     const path = await createProjectStructure(appName, isTypeScriptSupport)
     await execScript(npmInit, path)
