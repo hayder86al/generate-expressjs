@@ -8,10 +8,11 @@ import chalk from "chalk"
 const defaultAppName = "my-app"
 const npmInit = "npm init -y"
 const installExpress = "npm i express"
-const installNodemon = "npm install -D nodemon"
+const installNodemon = "npm install  --save-dev nodemon"
 const installDotenv = "npm install dotenv"
 const convertToEs6 = 'npm pkg set type="module"'
-const addTypeScript = "npm install typescript @types/node @types/express"
+const addTypeScript =
+  "npm install --save-dev typescript @types/node @types/express"
 
 const main = async () => {
   console.log(chalk.cyan.bold("\n🚀 Welcome to the Expressjs wrapper!\n"))
@@ -35,8 +36,9 @@ const main = async () => {
       ? 'npm pkg set scripts.start="node ./dist/app.js"'
       : 'npm pkg set scripts.start="node ./src/app.js"'
     const addDevScript = isTypeScriptSupport
-      ? 'npm pkg set scripts.dev="tsc && nodemon ./dist/app.js"'
+      ? 'npm pkg set scripts.dev="nodemon"'
       : 'npm pkg set scripts.dev="nodemon ./src/app.js"'
+    const addBuildScript = 'npm pkg set scripts.build="tsc"'
 
     console.log(chalk.dim("\n📦 Generating the project...\n"))
 
@@ -47,9 +49,13 @@ const main = async () => {
     await execScript(installDotenv, path)
     await execScript(addStartScript, path)
     await execScript(addDevScript, path)
-    await execScript(convertToEs6, path)
+
+    if (!isTypeScriptSupport) {
+      await execScript(convertToEs6, path)
+    }
 
     if (isTypeScriptSupport) {
+      await execScript(addBuildScript, path)
       await execScript(addTypeScript, path)
     }
 

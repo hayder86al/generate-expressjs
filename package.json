@@ -1,6 +1,6 @@
 {
   "name": "generate-expressjs",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A cli app to create an expressjs boiler plate.",
   "main": "index.js",
   "type": "module",
