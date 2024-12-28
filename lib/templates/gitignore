@@ -1,0 +1,57 @@
+### Node ###
+node_modules
+npm-debug.log
+yarn-error.log
+
+### Environment Variables ###
+.env
+.env.local
+.env.*.local
+
+### Logs ###
+logs
+*.log
+log/
+*.gz
+
+### Editor ###
+*.swp
+*~
+.vscode/
+.idea/
+.DS_Store
+
+### OS ###
+Thumbs.db
+
+### Dependency directories ###
+/node_modules
+/bower_components
+
+### Build artifacts ###
+dist/
+coverage/
+
+### Misc ###
+*.bak
+*.tmp
+
+### Testing ###
+/coverage/
+/.nyc_output
+/junit.xml
+
+### Typescript ###
+*.tsbuildinfo
+
+### PM2 ###
+pm-process.json
+pm-process.log
+
+### Optional ###
+public/uploads
+public/images
+
+### ES6 Modules ###
+*.mjs
+*.cjs

@@ -5,6 +5,7 @@ import { stdin as input, stdout as output } from "node:process"
 import { createProjectStructure } from "../lib/createProjectStructure.js"
 import chalk from "chalk"
 import ora from "ora"
+import inquirer from "inquirer"
 
 const defaultAppName = "my-app"
 const npmInit = "npm init -y"
@@ -17,7 +18,7 @@ const addTypeScript =
 
 const main = async () => {
   console.log(chalk.cyan.bold("\n🚀 Welcome to the Expressjs wrapper!\n"))
-
+  const spinner = ora("📦 Generating the project...")
   try {
     const rl = readline.createInterface({ input, output })
 
@@ -28,10 +29,15 @@ const main = async () => {
     )
     const appName = appNameAnswer.length > 1 ? appNameAnswer : defaultAppName
 
-    const typeScriptAnswer = await rl.question(
-      chalk.yellow("🔧 Add Typescript support? (y/n) ")
-    )
-    let isTypeScriptSupport = typeScriptAnswer === "y"
+    const typeScriptAnswer = await inquirer.prompt([
+      {
+        type: "list",
+        name: "typescript",
+        message: chalk.yellow("🔧 Add Typescript support?"),
+        choices: ["Yes", "No"],
+      },
+    ])
+    let isTypeScriptSupport = typeScriptAnswer.typescript === "Yes"
 
     const addStartScript = isTypeScriptSupport
       ? 'npm pkg set scripts.start="node ./dist/app.js"'
@@ -42,7 +48,7 @@ const main = async () => {
     const addBuildScript = 'npm pkg set scripts.build="tsc"'
 
     console.log(chalk.dim("\n📦 Generating the project...\n"))
-    const spinner = ora("📦 Generating the project...").start()
+    spinner.start()
 
     const path = await createProjectStructure(appName, isTypeScriptSupport)
     await execScript(npmInit, path)
@@ -73,7 +79,8 @@ const main = async () => {
 
     rl.close()
   } catch (error) {
-    console.error(chalk.red.bold(`\n❌ Error: ${error}\n`))
+    spinner.fail("❌ Error: Project generation failed!")
+    console.error(chalk.red.bold(`\n❌ Error: something went wrong!\n`))
   }
 }
 
